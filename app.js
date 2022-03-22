@@ -2,14 +2,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
-var indexRouter = require('./routes/student');
+var indexRouter = require('./routes/students');
 
 var app = express();
 var mongoose = require("mongoose");
 
 var dev_db_url =
-  "mongodb+srv://Adrien0602:6SGCnp3qZfQ0K9ii@iut.lqrr3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb+srv://Adrien0602:4V9xgf3ok8vOa9s1@iut.lqrr3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
 
@@ -26,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors());
 app.use('/student', indexRouter);
 
 module.exports = app;

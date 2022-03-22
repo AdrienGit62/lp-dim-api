@@ -1,4 +1,4 @@
-var Student = require("../models/student");
+var Students = require("../models/students");
 
 const { param, body, validationResult } = require("express-validator");
 
@@ -48,7 +48,7 @@ exports.create = [
     const errors = validationResult(req);
 
     // Create student object with escaped and trimmed data
-    var student = new Student({
+    var student = new Students({
       _id: req.body.id,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -72,7 +72,7 @@ exports.create = [
 
 // Read
 exports.getAll = function (req, res, next) {
-  Student.find().exec(function (err, result) {
+  Students.find().exec(function (err, result) {
     if (err) {
       return res.status(500).json(err);
     }
@@ -96,7 +96,7 @@ exports.getById = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     } else {
-      Student.findById(req.params.id).exec(function (err, result) {
+      Students.findById(req.params.id).exec(function (err, result) {
         if (err) {
           return res.status(500).json(err);
         }
@@ -123,7 +123,7 @@ exports.delete = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     } else {
-      Student.findByIdAndRemove(req.params.id).exec(function (err, result) {
+      Students.findByIdAndRemove(req.params.id).exec(function (err, result) {
         if (err) {
           return res.status(500).json(err);
         }
@@ -177,7 +177,7 @@ exports.update = [
     const errors = validationResult(req);
 
     // Create student object with escaped and trimmed data
-    var student = new Student({
+    var student = new Students({
       _id: req.params.id,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -189,7 +189,7 @@ exports.update = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     } else {
-      Student.findByIdAndUpdate(req.params.id, student, function (err, result) {
+      Students.findByIdAndUpdate(req.params.id, student, function (err, result) {
         if (err) {
           return res.status(500).json(err);
         }

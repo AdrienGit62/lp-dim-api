@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 //Controller
-var student_controller = require("../controllers/student");
+var student_controller = require("../controllers/students");
 
 router.get("/", student_controller.getAll);
 
